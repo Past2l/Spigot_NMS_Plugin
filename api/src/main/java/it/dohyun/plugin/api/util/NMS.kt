@@ -36,5 +36,9 @@ class NMS {
                 false
             }
         }
+
+        fun setTabList(player: Player, header: String, footer: String) {
+            nms.setTabList(player, header, footer)
+        }
     }
 }
