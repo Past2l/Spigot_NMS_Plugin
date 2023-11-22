@@ -13,4 +13,8 @@ class NMS(val plugin: Plugin) : NMS {
         val connection = (player as CraftPlayer).handle.connection
         connection.send(packet as Packet<*>)
     }
+
+    override fun setTabList(player: Player, header: String, footer: String) {
+        sendPacket(player, PACKET.setTabList(header, footer))
+    }
 }
