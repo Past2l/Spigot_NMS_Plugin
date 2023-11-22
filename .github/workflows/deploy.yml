@@ -1,0 +1,60 @@
+name: Spigot Plugin Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    name: Deploy Spigot Plugin
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main branch from GitHub
+        uses: actions/checkout@v2
+
+      - name: Set up a cache for Maven
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Set up JDK 8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 8
+
+      - name: Download Spigot 1.12.2
+        uses: SpraxDev/Action-SpigotMC@v4
+        with:
+          versions: 1.12.2
+          remapped: true
+
+      - name: Download Spigot 1.14.4
+        uses: SpraxDev/Action-SpigotMC@v4
+        with:
+          versions: 1.14.4
+          remapped: true
+
+      - name: Download Spigot 1.16.5
+        uses: SpraxDev/Action-SpigotMC@v4
+        with:
+          versions: 1.16.5
+          remapped: true
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
+
+      - name: Download Spigot 1.20.1
+        uses: SpraxDev/Action-SpigotMC@v4
+        with:
+          versions: 1.20.1
+          remapped: true
+
+      - name: Build Spigot Plugin
+        run: |
+          mvn -B package --file pom.xml

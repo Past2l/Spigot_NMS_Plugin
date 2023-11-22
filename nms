@@ -1,0 +1,71 @@
+#!/bin/bash
+set -e
+
+if [ ! -d ./BuildTools ]; then
+  mkdir -p ./BuildTools
+fi
+cd ./BuildTools
+
+if [ ! -e ./BuildTools.jar ]; then
+  curl -o BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
+fi
+
+if [ $(uname) == "Darwin" ]; then
+  OS="macosx"
+else
+  OS="linux"
+fi
+
+declare -a ZULU_VERSIONS
+ZULU_VERSIONS[8]=zulu8.74.0.17-ca-jre8.0.392
+ZULU_VERSIONS[16]=zulu16.32.15-ca-jre16.0.2
+ZULU_VERSIONS[17]=zulu17.46.19-ca-jre17.0.9
+
+case $(uname -m) in
+  "x86_64")
+    ARCH="x64"
+    ;;
+  "arm64" | "aarch64")
+    ARCH="aarch64"
+    ;;
+  *)
+    echo "Unsupported Architecture"
+    exit 1
+    ;;
+esac
+
+if [ ! -d ./java ]; then
+  mkdir -p ./java
+fi
+
+for JAVA_VERSION in 8 16 17
+do
+  if [ ! -d ./java/$JAVA_VERSION ]; then
+    curl -sLO https://cdn.azul.com/zulu/bin/${ZULU_VERSIONS[$JAVA_VERSION]}-${OS}_$ARCH.tar.gz
+    tar -zxf ${ZULU_VERSIONS[$JAVA_VERSION]}-${OS}_$ARCH.tar.gz -C ./java
+    mv ./java/${ZULU_VERSIONS[$JAVA_VERSION]}-${OS}_$ARCH ./java/$JAVA_VERSION
+    rm ${ZULU_VERSIONS[$JAVA_VERSION]}-${OS}_$ARCH.tar.gz
+  fi
+done
+
+if [ $OS = "macosx" ]; then
+  declare -a versions
+  index=0
+  while IFS= read -r line || [ -n "$line" ]; do
+      versions[index++]="$line"
+  done < "../versions"
+else
+  mapfile -t versions < '../versions'
+fi
+
+for version in "${versions[@]}"; do
+  IFS='.' read -ra v <<< "$version"
+  if [ "${v[0]}" -eq 1 ] && [ "${v[1]}" -ge 12 ] && [ "${v[1]}" -le 16 ]; then
+    JAVA_VERSION=8
+  elif [ "${v[0]}" -eq 1 ] && [ "${v[1]}" -eq 17 ]; then
+    JAVA_VERSION=16
+  else
+    JAVA_VERSION=17
+  fi
+  ./java/$JAVA_VERSION/bin/java -jar BuildTools.jar --rev "$version" --remapped
+done
