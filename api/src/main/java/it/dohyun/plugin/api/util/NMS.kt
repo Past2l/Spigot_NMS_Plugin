@@ -17,7 +17,7 @@ class NMS {
             Logger.log("NMS Version : ${getVersion()}")
             return try {
                 val version = getVersion()
-                val className = "it.dohyun.template.nms.$version.util.NMS"
+                val className = "it.dohyun.plugin.nms.$version.util.NMS"
                 val clazz = Class.forName(className)
                 val constructor = clazz.getConstructor(Plugin::class.java)
                 val instance = constructor.newInstance(plugin)
