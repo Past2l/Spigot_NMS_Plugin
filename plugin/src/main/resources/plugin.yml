@@ -1,5 +1,5 @@
-name: Plugin
+name: NMS
 version: '${project.version}'
-main: it.dohyun.plugin.Plugin
+main: it.dohyun.nms.NMS
 authors: [ Green0121 ]
 website: https://github.com/past2l
