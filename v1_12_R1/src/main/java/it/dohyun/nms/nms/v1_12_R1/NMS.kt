@@ -1,7 +1,7 @@
 package it.dohyun.nms.nms.v1_12_R1
 
 import it.dohyun.nms.api.API
-import it.dohyun.nms.api.type.nms.NMS
+import it.dohyun.nms.type.nms.NMS
 import net.minecraft.server.v1_12_R1.IChatBaseComponent
 import net.minecraft.server.v1_12_R1.Packet
 import net.minecraft.server.v1_12_R1.PacketPlayOutPlayerListHeaderFooter

@@ -1,4 +1,4 @@
-package it.dohyun.nms.api.type.nms
+package it.dohyun.nms.type.nms
 
 import org.bukkit.entity.Player
 

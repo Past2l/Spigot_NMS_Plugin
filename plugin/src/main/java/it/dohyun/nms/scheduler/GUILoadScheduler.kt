@@ -2,7 +2,7 @@ package it.dohyun.nms.scheduler
 
 import it.dohyun.nms.api.API
 import it.dohyun.nms.api.gui.TabList
-import it.dohyun.nms.api.type.Scheduler
+import it.dohyun.nms.type.Scheduler
 import org.bukkit.Bukkit
 
 class GUILoadScheduler {
