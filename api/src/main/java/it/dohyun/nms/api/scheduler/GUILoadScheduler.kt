@@ -1,6 +1,7 @@
-package it.dohyun.nms.scheduler
+package it.dohyun.nms.api.scheduler
 
 import it.dohyun.nms.api.API
+import it.dohyun.nms.api.config.Config
 import it.dohyun.nms.api.gui.TabList
 import it.dohyun.nms.type.Scheduler
 import org.bukkit.Bukkit
@@ -14,9 +15,10 @@ class GUILoadScheduler {
                 API.getPlugin(),
                 {
                     TabList.setHeaderFooter()
+                    TabList.setPlayerName()
                 },
                 0,
-                200
+                Config.data.tabList.interval.toLong(),
             )
         }
 
