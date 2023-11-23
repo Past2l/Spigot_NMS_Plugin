@@ -26,7 +26,7 @@ class TabList {
         fun setPlayerName() {
             Bukkit.getOnlinePlayers().forEach {
                 it.playerListName = Config.format(
-                    Config.data.tabList.player,
+                    Config.data.tabList.playerName,
                     ConfigFormatOption(player = it),
                 )
             }

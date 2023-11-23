@@ -24,7 +24,7 @@ class Config {
                 resourcePack = data?.get("resourcePack")?.toString() ?: default.resourcePack,
                 chat = data?.get("chat")?.toString() ?: default.chat,
                 tabList = ConfigTabList(
-                    player = tabList?.get("player")?.toString() ?: default.tabList.player,
+                    playerName = tabList?.get("playerName")?.toString() ?: default.tabList.playerName,
                     header = tabList?.get("header")?.toString() ?: default.tabList.header,
                     footer = tabList?.get("footer")?.toString() ?: default.tabList.footer,
                     interval = tabList?.get("footer")?.toString()?.toInt() ?: default.tabList.interval,
@@ -41,7 +41,7 @@ class Config {
                     "resourcePack" to this.data.resourcePack,
                     "chat" to this.data.chat,
                     "tabList" to hashMapOf(
-                        "player" to this.data.tabList.player,
+                        "playerName" to this.data.tabList.playerName,
                         "header" to this.data.tabList.header,
                         "footer" to this.data.tabList.footer,
                         "interval" to this.data.tabList.interval,
