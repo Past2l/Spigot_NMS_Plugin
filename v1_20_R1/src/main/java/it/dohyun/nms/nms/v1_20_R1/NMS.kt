@@ -1,5 +1,6 @@
 package it.dohyun.nms.nms.v1_20_R1
 
+import it.dohyun.nms.api.API
 import it.dohyun.nms.api.type.nms.NMS
 import net.minecraft.network.chat.MutableComponent
 import net.minecraft.network.chat.contents.LiteralContents
@@ -7,9 +8,10 @@ import net.minecraft.network.protocol.Packet
 import net.minecraft.network.protocol.game.ClientboundTabListPacket
 import org.bukkit.craftbukkit.v1_20_R1.entity.CraftPlayer
 import org.bukkit.entity.Player
-import org.bukkit.plugin.Plugin
 
-class NMS(plugin: Plugin) : NMS {
+class NMS : NMS {
+    private val plugin = API.getPlugin()
+
     override fun sendPacket(player: Player, packet: Any) {
         val connection = (player as CraftPlayer).handle.connection
         connection.send(packet as Packet<*>)

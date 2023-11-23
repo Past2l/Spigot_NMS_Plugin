@@ -19,8 +19,8 @@ class NMS {
                 val version = getVersion()
                 val className = "it.dohyun.nms.nms.$version.NMS"
                 val clazz = Class.forName(className)
-                val constructor = clazz.getConstructor(Plugin::class.java)
-                val instance = constructor.newInstance(plugin)
+                val constructor = clazz.getConstructor()
+                val instance = constructor.newInstance()
                 if (instance is NMS) {
                     nms = instance
                     Logger.log("NMS loading completed§r")

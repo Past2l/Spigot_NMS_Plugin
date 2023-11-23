@@ -1,14 +1,16 @@
 package it.dohyun.nms.nms.v1_14_R1
 
+import it.dohyun.nms.api.API
 import it.dohyun.nms.api.type.nms.NMS
 import net.minecraft.server.v1_14_R1.IChatBaseComponent
 import net.minecraft.server.v1_14_R1.Packet
 import net.minecraft.server.v1_14_R1.PacketPlayOutPlayerListHeaderFooter
 import org.bukkit.craftbukkit.v1_14_R1.entity.CraftPlayer
 import org.bukkit.entity.Player
-import org.bukkit.plugin.Plugin
 
-class NMS(plugin: Plugin) : NMS {
+class NMS : NMS {
+    private val plugin = API.getPlugin()
+
     override fun sendPacket(player: Player, packet: Any) {
         val connection = (player as CraftPlayer).handle.playerConnection
         connection.sendPacket(packet as Packet<*>)
