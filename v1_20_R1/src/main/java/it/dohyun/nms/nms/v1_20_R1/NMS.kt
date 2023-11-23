@@ -1,7 +1,7 @@
 package it.dohyun.nms.nms.v1_20_R1
 
 import it.dohyun.nms.api.API
-import it.dohyun.nms.api.type.nms.NMS
+import it.dohyun.nms.type.nms.NMS
 import net.minecraft.network.chat.MutableComponent
 import net.minecraft.network.chat.contents.LiteralContents
 import net.minecraft.network.protocol.Packet

@@ -1,4 +1,4 @@
-package it.dohyun.nms.api.type
+package it.dohyun.nms.type
 
 interface Scheduler {
     var id: Int?

@@ -1,7 +1,7 @@
 package it.dohyun.nms.api.util
 
 import it.dohyun.nms.api.API
-import it.dohyun.nms.api.type.nms.NMS
+import it.dohyun.nms.type.nms.NMS
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 
