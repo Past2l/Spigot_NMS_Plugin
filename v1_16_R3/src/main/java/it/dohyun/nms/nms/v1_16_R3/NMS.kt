@@ -1,10 +1,10 @@
-package it.dohyun.nms.nms.v1_14_R1.util
+package it.dohyun.nms.nms.v1_16_R3
 
 import it.dohyun.nms.api.type.nms.NMS
-import net.minecraft.server.v1_14_R1.IChatBaseComponent
-import net.minecraft.server.v1_14_R1.Packet
-import net.minecraft.server.v1_14_R1.PacketPlayOutPlayerListHeaderFooter
-import org.bukkit.craftbukkit.v1_14_R1.entity.CraftPlayer
+import net.minecraft.server.v1_16_R3.IChatBaseComponent
+import net.minecraft.server.v1_16_R3.Packet
+import net.minecraft.server.v1_16_R3.PacketPlayOutPlayerListHeaderFooter
+import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer
 import org.bukkit.entity.Player
 import org.bukkit.plugin.Plugin
 
@@ -16,8 +16,8 @@ class NMS(plugin: Plugin) : NMS {
 
     override fun setTabList(player: Player, header: String, footer: String) {
         val packet = PacketPlayOutPlayerListHeaderFooter()
-        setValue(packet, "a", IChatBaseComponent.ChatSerializer.a("""{"text":"${header.replace("\n", "\\n")}"}"""))
-        setValue(packet, "b", IChatBaseComponent.ChatSerializer.a("""{"text":"${footer.replace("\n", "\\n")}"}"""))
+        packet.header = IChatBaseComponent.ChatSerializer.a("""{"text":"${header.replace("\n", "\\n")}"}""")
+        packet.footer = IChatBaseComponent.ChatSerializer.a("""{"text":"${footer.replace("\n", "\\n")}"}""")
         sendPacket(player, packet)
     }
 
