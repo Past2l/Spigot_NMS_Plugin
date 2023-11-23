@@ -4,7 +4,6 @@ import it.dohyun.nms.api.API
 import it.dohyun.nms.api.type.nms.NMS
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
-import org.bukkit.plugin.Plugin
 
 class NMS {
     companion object {
