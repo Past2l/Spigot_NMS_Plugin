@@ -1,5 +1,6 @@
 package it.dohyun.nms
 
+import it.dohyun.nms.api.config.Config
 import it.dohyun.nms.api.util.NMS
 import it.dohyun.nms.event.PlayerEvent
 import it.dohyun.nms.scheduler.GUILoadScheduler
@@ -15,12 +16,14 @@ class NMS : JavaPlugin() {
 
     override fun onEnable() {
         if (!NMS.init()) return
+        Config.init()
         initSchedulers()
         initEvents()
     }
 
     override fun onDisable() {
         removeSchedulers()
+        Config.save()
     }
 
     private fun initSchedulers() {
