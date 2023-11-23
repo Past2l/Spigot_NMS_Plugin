@@ -15,6 +15,7 @@ class GUILoadScheduler {
                 API.getPlugin(),
                 {
                     TabList.setHeaderFooter()
+                    TabList.setPlayerName()
                 },
                 0,
                 Config.data.tabList.interval.toLong(),

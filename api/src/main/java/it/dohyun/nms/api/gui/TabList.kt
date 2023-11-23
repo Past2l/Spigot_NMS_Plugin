@@ -14,5 +14,11 @@ class TabList {
                 )
             }
         }
+
+        fun setPlayerName() {
+            Bukkit.getOnlinePlayers().forEach {
+                it.playerListName = it.name
+            }
+        }
     }
 }
