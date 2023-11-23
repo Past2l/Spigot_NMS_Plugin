@@ -27,7 +27,7 @@ class Config {
                     playerName = tabList?.get("playerName")?.toString() ?: default.tabList.playerName,
                     header = tabList?.get("header")?.toString() ?: default.tabList.header,
                     footer = tabList?.get("footer")?.toString() ?: default.tabList.footer,
-                    interval = tabList?.get("footer")?.toString()?.toInt() ?: default.tabList.interval,
+                    interval = tabList?.get("interval")?.toString()?.toInt() ?: default.tabList.interval,
                 )
             )
         }
