@@ -1,4 +1,4 @@
-package it.dohyun.nms.scheduler
+package it.dohyun.nms.api.scheduler
 
 import it.dohyun.nms.api.API
 import it.dohyun.nms.api.gui.TabList

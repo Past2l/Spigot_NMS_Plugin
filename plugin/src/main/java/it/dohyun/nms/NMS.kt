@@ -2,8 +2,8 @@ package it.dohyun.nms
 
 import it.dohyun.nms.api.config.Config
 import it.dohyun.nms.api.util.NMS
-import it.dohyun.nms.event.PlayerEvent
-import it.dohyun.nms.scheduler.GUILoadScheduler
+import it.dohyun.nms.api.event.PlayerEvent
+import it.dohyun.nms.api.scheduler.GUILoadScheduler
 import org.bukkit.plugin.java.JavaPlugin
 
 class NMS : JavaPlugin() {

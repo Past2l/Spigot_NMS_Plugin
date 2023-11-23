@@ -1,4 +1,4 @@
-package it.dohyun.nms.event
+package it.dohyun.nms.api.event
 
 import it.dohyun.nms.api.gui.TabList
 import org.bukkit.event.EventHandler
