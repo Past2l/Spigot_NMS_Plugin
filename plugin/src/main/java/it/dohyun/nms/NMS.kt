@@ -1,6 +1,7 @@
 package it.dohyun.nms
 
 import it.dohyun.nms.api.config.Config
+import it.dohyun.nms.api.event.MOTDEvent
 import it.dohyun.nms.api.util.NMS
 import it.dohyun.nms.api.event.PlayerEvent
 import it.dohyun.nms.api.scheduler.GUILoadScheduler
@@ -11,7 +12,8 @@ class NMS : JavaPlugin() {
         GUILoadScheduler
     )
     private val events = arrayOf(
-        PlayerEvent()
+        PlayerEvent(),
+        MOTDEvent(),
     )
 
     override fun onEnable() {
