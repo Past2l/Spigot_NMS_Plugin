@@ -17,13 +17,13 @@ class NMS : JavaPlugin() {
     override fun onEnable() {
         if (!NMS.init()) return
         Config.init()
+        Config.save()
         initSchedulers()
         initEvents()
     }
 
     override fun onDisable() {
         removeSchedulers()
-        Config.save()
     }
 
     private fun initSchedulers() {
