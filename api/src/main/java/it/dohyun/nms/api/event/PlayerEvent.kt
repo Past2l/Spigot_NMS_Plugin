@@ -11,7 +11,10 @@ import org.bukkit.event.player.PlayerJoinEvent
 class PlayerEvent: Listener {
     @EventHandler
     fun onJoin(event: PlayerJoinEvent) {
-        TabList.setHeaderFooter()
+        TabList.setHeaderFooter(
+            Config.data.tabList.header[0],
+            Config.data.tabList.footer[0],
+        )
     }
 
     @EventHandler

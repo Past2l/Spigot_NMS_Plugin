@@ -7,18 +7,12 @@ import org.bukkit.Bukkit
 
 class TabList {
     companion object {
-        fun setHeaderFooter() {
+        fun setHeaderFooter(header: String, footer: String) {
             Bukkit.getOnlinePlayers().forEach {
                 NMS.setTabList(
                     it,
-                    Config.format(
-                        Config.data.tabList.header,
-                        ConfigFormatOption(player = it),
-                    ),
-                    Config.format(
-                        Config.data.tabList.footer,
-                        ConfigFormatOption(player = it),
-                    ),
+                    Config.format(header, ConfigFormatOption(player = it)),
+                    Config.format(footer, ConfigFormatOption(player = it)),
                 )
             }
         }

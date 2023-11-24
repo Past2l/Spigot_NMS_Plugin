@@ -25,8 +25,8 @@ class Config {
                 chat = data?.get("chat")?.toString() ?: default.chat,
                 tabList = ConfigTabList(
                     playerName = tabList?.get("playerName")?.toString() ?: default.tabList.playerName,
-                    header = tabList?.get("header")?.toString() ?: default.tabList.header,
-                    footer = tabList?.get("footer")?.toString() ?: default.tabList.footer,
+                    header = tabList?.get("header") as ArrayList<String>? ?: default.tabList.header,
+                    footer = tabList?.get("footer") as ArrayList<String>? ?: default.tabList.footer,
                     interval = tabList?.get("interval")?.toString()?.toInt() ?: default.tabList.interval,
                 )
             )
