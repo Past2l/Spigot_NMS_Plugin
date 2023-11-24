@@ -6,4 +6,5 @@ data class Config(
     val resourcePack: String = "",
     val chat: String = "%player.name% > %chat.message%",
     val tabList: ConfigTabList = ConfigTabList(),
+    val motd: ConfigMOTD = ConfigMOTD(),
 )
