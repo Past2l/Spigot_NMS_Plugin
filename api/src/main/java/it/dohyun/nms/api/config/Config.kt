@@ -50,6 +50,28 @@ class Config {
             )
         }
 
+        private fun formatPart(str: String): String {
+            return formatIf(formatNotEmpty(str))
+        }
+
+        private fun formatIf(str: String) : String {
+            return Regex("%if\\(([^|]+)\\|([^)]+)\\)%\\(([^|]*)\\|([^)]*)\\)%").replace(str) {
+                var (str1, str2, res1, res2) = it.destructured
+                str1 = formatPart(str1)
+                str2 = formatPart(str2)
+                res1 = formatPart(res1)
+                res2 = formatPart(res2)
+                if (str1 == str2) res1 else res2
+            }
+        }
+
+        private fun formatNotEmpty(str: String) : String {
+            return Regex("%notempty\\(([^)]+)\\)%\\(([^|]*)\\|([^)]*)\\)%").replace(str) {
+                val (str1, res1, res2) = it.destructured
+                if (str1.isNotEmpty()) res1 else res2
+            }
+        }
+
         fun format(
             str: String?,
             option: ConfigFormatOption = ConfigFormatOption()
@@ -62,16 +84,16 @@ class Config {
                     .replace("%player.op%", option.player.isOp.toString())
                     .replace("%player.uuid%", option.player.uniqueId.toString())
             }
-            result = Regex("&[0-9a-fk-orA-FK-OR]").replace(
-                result
-                    .replace("%server.name%", this.data.name)
-                    .replace("%server.players%", Bukkit.getOnlinePlayers().size.toString())
-                    .replace("%date.year%", now.format(DateTimeFormatter.ofPattern("yyyy")))
-                    .replace("%date.month%", now.format(DateTimeFormatter.ofPattern("MM")))
-                    .replace("%date.day%", now.format(DateTimeFormatter.ofPattern("dd")))
-                    .replace("%date.hour%", now.format(DateTimeFormatter.ofPattern("HH")))
-                    .replace("%date.minute%", now.format(DateTimeFormatter.ofPattern("mm")))
-            ) {
+            result = result
+                .replace("%server.name%", this.data.name)
+                .replace("%server.players%", Bukkit.getOnlinePlayers().size.toString())
+                .replace("%date.year%", now.format(DateTimeFormatter.ofPattern("yyyy")))
+                .replace("%date.month%", now.format(DateTimeFormatter.ofPattern("MM")))
+                .replace("%date.day%", now.format(DateTimeFormatter.ofPattern("dd")))
+                .replace("%date.hour%", now.format(DateTimeFormatter.ofPattern("HH")))
+                .replace("%date.minute%", now.format(DateTimeFormatter.ofPattern("mm")))
+            result = formatPart(result)
+            result = Regex("&[0-9a-fk-orA-FK-OR]").replace(result) {
                 "§${it.value.replace("&", "")}"
             }
             return if (option.trim) result.trim() else result
