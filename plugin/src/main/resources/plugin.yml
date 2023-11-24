@@ -3,3 +3,17 @@ version: '${project.version}'
 main: it.dohyun.nms.NMS
 authors: [ Green0121 ]
 website: https://github.com/past2l
+
+commands:
+  config:
+    description: Modify Config Data Command
+    permission: nms.config
+permissions:
+  nms.*:
+    description: All commands are allow
+    default: op
+    children:
+      nms.config: true
+  nms.config:
+    description: Modify Config Data Command Permission
+    default: op
