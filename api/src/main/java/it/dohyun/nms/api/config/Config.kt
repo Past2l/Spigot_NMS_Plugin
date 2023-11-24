@@ -3,6 +3,7 @@ package it.dohyun.nms.api.config
 import it.dohyun.nms.api.util.Yaml
 import it.dohyun.nms.type.config.Config
 import it.dohyun.nms.type.config.ConfigFormatOption
+import it.dohyun.nms.type.config.ConfigMOTD
 import it.dohyun.nms.type.config.ConfigTabList
 import org.bukkit.Bukkit
 import java.time.ZoneId
@@ -16,6 +17,7 @@ class Config {
         fun init() {
             val data = Yaml.read("config.yml")
             val tabList = data?.get("tabList") as HashMap<*, *>?
+            val motd = data?.get("motd") as HashMap<*, *>?
             val default = Config()
 
             this.data = Config(
@@ -28,6 +30,10 @@ class Config {
                     header = tabList?.get("header") as ArrayList<String>? ?: default.tabList.header,
                     footer = tabList?.get("footer") as ArrayList<String>? ?: default.tabList.footer,
                     interval = tabList?.get("interval")?.toString()?.toInt() ?: default.tabList.interval,
+                ),
+                motd = ConfigMOTD(
+                    content = motd?.get("content") as ArrayList<String>? ?: default.motd.content,
+                    center = motd?.get("center")?.toString()?.toBoolean() ?: default.motd.center,
                 )
             )
         }
@@ -45,6 +51,10 @@ class Config {
                         "header" to this.data.tabList.header,
                         "footer" to this.data.tabList.footer,
                         "interval" to this.data.tabList.interval,
+                    ),
+                    "motd" to hashMapOf(
+                        "content" to this.data.motd.content,
+                        "center" to this.data.motd.center,
                     ),
                 )
             )
