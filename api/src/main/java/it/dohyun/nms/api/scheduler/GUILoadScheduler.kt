@@ -26,8 +26,8 @@ class GUILoadScheduler {
                     )
                     TabList.setPlayerName()
                     tabListCount = if (
-                        tabListCount - 1 < tabListMax
-                    ) tabListCount + 1 else 0
+                        ++tabListCount < tabListMax
+                    ) tabListCount else 0
                 },
                 0,
                 Config.data.tabList.interval.toLong(),
