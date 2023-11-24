@@ -17,7 +17,6 @@ class NMS : JavaPlugin() {
     override fun onEnable() {
         if (!NMS.init()) return
         Config.init()
-        Config.save()
         initSchedulers()
         initEvents()
     }

@@ -51,7 +51,7 @@ class Config {
         }
 
         private fun formatPart(str: String): String {
-            return formatIf(formatNotEmpty(str))
+            return formatRepeatInsert(formatIf(formatNotEmpty(str)))
         }
 
         private fun formatIf(str: String) : String {
@@ -66,9 +66,26 @@ class Config {
         }
 
         private fun formatNotEmpty(str: String) : String {
-            return Regex("%notempty\\(([^)]+)\\)%\\(([^|]*)\\|([^)]*)\\)%").replace(str) {
+            return Regex("%ne\\(([^)]+)\\)%\\(([^|]*)\\|([^)]*)\\)%").replace(str) {
                 val (str1, res1, res2) = it.destructured
                 if (str1.isNotEmpty()) res1 else res2
+            }
+        }
+
+        private fun formatRepeatInsert(str: String): String {
+            return Regex("%ri\\(([^|]+)\\|([^|]+)\\|([^)]+)\\)%").replace(str) {
+                val (input, color, idx) = it.destructured
+                val colors = color.split(",")
+                var count = idx.toInt() - 1
+                val result = arrayListOf<String>()
+                input.forEach { char ->
+                    result.add(
+                        if (char.isWhitespace()) " " else colors[count] + char
+                    )
+                    if (!char.isWhitespace())
+                        count = if (++count < colors.size) count else 0
+                }
+                result.joinToString("")
             }
         }
 
