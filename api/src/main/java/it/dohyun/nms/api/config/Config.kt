@@ -66,7 +66,7 @@ class Config {
         }
 
         private fun formatNotEmpty(str: String) : String {
-            return Regex("%notempty\\(([^)]+)\\)%\\(([^|]*)\\|([^)]*)\\)%").replace(str) {
+            return Regex("%ne\\(([^)]+)\\)%\\(([^|]*)\\|([^)]*)\\)%").replace(str) {
                 val (str1, res1, res2) = it.destructured
                 if (str1.isNotEmpty()) res1 else res2
             }
