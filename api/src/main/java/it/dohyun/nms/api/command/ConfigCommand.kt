@@ -15,7 +15,8 @@ class ConfigCommand: CommandExecutor, TabExecutor {
     private val help = hashMapOf(
         "default" to arrayOf(
             "&e---------------&r Help: /$name &e---------------&r",
-            "&6/$name&r: ",
+            "&6/$name reload&r: Config를 다시 불러옵니다.",
+            "&6/$name save&r: Config를 저장합니다.",
         ).joinToString("\n")
     )
 
@@ -26,7 +27,7 @@ class ConfigCommand: CommandExecutor, TabExecutor {
         args: Array<out String>,
     ): MutableList<String> {
         return when(args.size) {
-            else -> mutableListOf()
+            else -> mutableListOf("reload", "save")
         }
     }
 
@@ -40,6 +41,14 @@ class ConfigCommand: CommandExecutor, TabExecutor {
         if (args.isEmpty())
             sender.sendMessage(Config.format(help["default"]))
         else when (args[0]) {
+            "reload" -> {
+                Config.init()
+                sender.sendMessage(Config.format("&a[&e%server.name%&a]&r Config를 다시 불러왔습니다."))
+            }
+            "save" -> {
+                Config.save()
+                sender.sendMessage(Config.format("&a[&e%server.name%&a]&r Config를 저장하였습니다."))
+            }
             else -> sender.sendMessage(Config.format(help["default"]))
         }
         return true
